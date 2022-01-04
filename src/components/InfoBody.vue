@@ -71,46 +71,38 @@
                   </div>
                 </template>
                 <div style="margin-top: 12px">
-                  <template v-if="realTimeWeather.text === '多云'">
-                    <span style="margin-right: 5px"
+                  <span style="margin-right: 5px"
+                    ><template v-if="realTimeWeather.text === '多云'"
                       ><img
                         style="height: 18px; width: 18px; float: left"
                         src="../assets/icon/cloudy.svg"
-                        alt=""
-                    /></span>
-                  </template>
-                  <template v-if="realTimeWeather.text === '雾'">
-                    <span style="margin-right: 5px"
+                        alt="" /></template
+                    ><template v-if="realTimeWeather.text === '晴'"
                       ><img
                         style="height: 18px; width: 18px; float: left"
-                        src="../assets/icon/foggy.svg"
-                        alt=""
-                    /></span>
-                  </template>
-                  <template v-if="realTimeWeather.text === '小雨'">
-                    <span style="margin-right: 5px"
+                        src="../assets/icon/sunny.svg"
+                        alt="" /></template
+                    ><template v-if="realTimeWeather.text === '小雨'"
                       ><img
                         style="height: 18px; width: 18px; float: left"
                         src="../assets/icon/lightrain.svg"
-                        alt=""
-                    /></span>
-                  </template>
-                  <template v-if="realTimeWeather.text === '中雨'">
-                    <span style="margin-right: 5px"
+                        alt="" /></template
+                    ><template v-if="realTimeWeather.text === '中雨'"
                       ><img
                         style="height: 18px; width: 18px; float: left"
                         src="../assets/icon/moderateRain.svg"
-                        alt=""
-                    /></span>
-                  </template>
-                  <template v-if="realTimeWeather.text === '阴'">
-                    <span style="margin-right: 5px"
+                        alt="" /></template
+                    ><template v-if="realTimeWeather.text === '阴'"
                       ><img
                         style="height: 18px; width: 18px; float: left"
                         src="../assets/icon/overcast.svg"
-                        alt=""
-                    /></span>
-                  </template>
+                        alt="" /></template
+                    ><template v-if="realTimeWeather.text === '雨夹雪'"
+                      ><img
+                        style="height: 18px; width: 18px; float: left"
+                        src="../assets/icon/sleet.svg"
+                        alt="" /></template
+                  ></span>
                   <span class="fontFamily font-size-14 margin-r-10">{{
                     realTimeWeather.text
                   }}</span
@@ -143,6 +135,11 @@
                 ><span style="display: inline-block">{{ item.hourly }}</span
                 ><br />
                 <span style="dispaly: inline-block"
+                  ><template v-if="item.text === '晴'">
+                    <img
+                      style="height: 18px; width: 18px; padding: 15px 0"
+                      src="../assets/icon/sunny.svg"
+                      alt="" /></template
                   ><template v-if="item.text === '多云'">
                     <img
                       style="height: 18px; width: 18px; padding: 15px 0"
@@ -153,10 +150,50 @@
                       style="height: 18px; width: 18px; padding: 15px 0"
                       src="../assets/icon/overcast.svg"
                       alt="" /></template
+                  ><template v-if="item.text === '阵雨'">
+                    <img
+                      style="height: 18px; width: 18px; padding: 15px 0"
+                      src="../assets/icon/shower.svg"
+                      alt="" /></template
                   ><template v-if="item.text === '小雨'">
                     <img
                       style="height: 18px; width: 18px; padding: 15px 0"
                       src="../assets/icon/lightrain.svg"
+                      alt="" /></template
+                  ><template v-if="item.text === '中雨'">
+                    <img
+                      style="height: 18px; width: 18px; padding: 15px 0"
+                      src="../assets/icon/moderateRain.svg"
+                      alt="" /></template
+                  ><template v-if="item.text === '大雨'">
+                    <img
+                      style="height: 18px; width: 18px; padding: 15px 0"
+                      src="../assets/icon/rainstorm.svg"
+                      alt="" /></template
+                  ><template v-if="item.text === '阵雪'">
+                    <img
+                      style="height: 18px; width: 18px; padding: 15px 0"
+                      src="../assets/icon/snowshower.svg"
+                      alt="" /></template
+                  ><template v-if="item.text === '小雪'">
+                    <img
+                      style="height: 18px; width: 18px; padding: 15px 0"
+                      src="../assets/icon/lightsnow.svg"
+                      alt="" /></template
+                  ><template v-if="item.text === '中雪'">
+                    <img
+                      style="height: 18px; width: 18px; padding: 15px 0"
+                      src="../assets/icon/moderateSnow.svg"
+                      alt="" /></template
+                  ><template v-if="item.text === '大雪'">
+                    <img
+                      style="height: 18px; width: 18px; padding: 15px 0"
+                      src="../assets/icon/snowstorm.svg"
+                      alt="" /></template
+                  ><template v-if="item.text === '雾'">
+                    <img
+                      style="height: 18px; width: 18px; padding: 15px 0"
+                      src="../assets/icon/foggy.svg"
                       alt="" /></template></span
                 ><br /><span style="display: inline-block"
                   >{{ item.temp }}°</span
@@ -165,10 +202,10 @@
             </div>
           </div>
           <div class="forecastBox">
-            <div style="font-size: 18px" class="fontFamily">10天天气预报</div>
+            <div style="font-size: 18px" class="fontFamily">10日天气预报</div>
             <div style="text-align: center">
               <span
-                style="padding: 60px; display: inline-block"
+                style="padding: 60px 55px; display: inline-block"
                 v-for="(item, index) in dailyWeather"
                 :key="index"
                 ><span style="display: inline-block">{{ item.date }}</span
@@ -178,6 +215,21 @@
                     ><img
                       style="height: 18px; width: 18px"
                       src="../assets/icon/sunny.svg"
+                      alt="" /></template
+                  ><template v-if="item.textDay === '多云'"
+                    ><img
+                      style="height: 18px; width: 18px"
+                      src="../assets/icon/cloudy.svg"
+                      alt="" /></template
+                  ><template v-if="item.textDay === '阴'"
+                    ><img
+                      style="height: 18px; width: 18px"
+                      src="../assets/icon/overcast.svg"
+                      alt="" /></template
+                  ><template v-if="item.textDay === '阵雨'"
+                    ><img
+                      style="height: 18px; width: 18px"
+                      src="../assets/icon/shower.svg"
                       alt="" /></template
                   ><template v-if="item.textDay === '小雨'"
                     ><img
@@ -189,15 +241,35 @@
                       style="height: 18px; width: 18px"
                       src="../assets/icon/moderateRain.svg"
                       alt="" /></template
-                  ><template v-if="item.textDay === '阴'"
+                  ><template v-if="item.textDay === '大雨'"
                     ><img
                       style="height: 18px; width: 18px"
-                      src="../assets/icon/overcast.svg"
+                      src="../assets/icon/rainstorm.svg"
                       alt="" /></template
-                  ><template v-if="item.textDay === '多云'"
+                  ><template v-if="item.textDay === '阵雪'"
                     ><img
                       style="height: 18px; width: 18px"
-                      src="../assets/icon/cloudy.svg"
+                      src="../assets/icon/snowshower.svg"
+                      alt="" /></template
+                  ><template v-if="item.textDay === '小雪'"
+                    ><img
+                      style="height: 18px; width: 18px"
+                      src="../assets/icon/lightsnow.svg"
+                      alt="" /></template
+                  ><template v-if="item.textDay === '中雪'"
+                    ><img
+                      style="height: 18px; width: 18px"
+                      src="../assets/icon/moderateSnow.svg"
+                      alt="" /></template
+                  ><template v-if="item.textDay === '大雪'"
+                    ><img
+                      style="height: 18px; width: 18px"
+                      src="../assets/icon/snowstorm.svg"
+                      alt="" /></template
+                  ><template v-if="item.textDay === '雾'"
+                    ><img
+                      style="height: 18px; width: 18px"
+                      src="../assets/icon/foggy.svg"
                       alt="" /></template></span
                 ><br />
                 <span style="display: inline-block">
