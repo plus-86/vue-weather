@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div class="autocomplete">
       <el-row class="demo-autocomplete">
         <el-col>
           <el-autocomplete
@@ -17,6 +17,7 @@
     </div>
     <div>
       <InfoBody
+        :cityName="cityName"
         :realTimeWeather="realTimeWeather"
         :hourlyWeather="hourlyWeather"
         :dailyWeather="dailyWeather"
@@ -24,6 +25,11 @@
     </div>
   </div>
 </template>
+<style lang="scss" scpoed>
+.autocomplete {
+  text-align: center;
+}
+</style>
 
 <script>
 import { httpGet } from '@/request/httpRequest.js'
@@ -40,7 +46,8 @@ export default {
       userInput: '',
       realTimeWeather: '',
       hourlyWeather: [],
-      dailyWeather: []
+      dailyWeather: [],
+      cityName: ''
     }
   },
   methods: {
@@ -67,15 +74,35 @@ export default {
     handleSelect(e) {
       httpGet(Domain.realTimeWeatherURL + e.id).then((res) => {
         console.log(res)
-        this.realTimeWeather = res.data.now
+        let now = res.data.now
+        now.formatTime =
+          now.obsTime.substring(0, 4) +
+          '年' +
+          now.obsTime.substring(5, 7) +
+          '月' +
+          now.obsTime.substring(8, 10) +
+          '日'
+        this.realTimeWeather = now
       })
       httpGet(Domain.hourlyWeatherURL + e.id).then((res) => {
         console.log(res)
-        this.hourlyWeather = res.data.hourly
+        let hourly = res.data.hourly
+        for (let i in hourly) {
+          hourly[i].hourly = hourly[i].fxTime.substring(11, 13) + '时'
+        }
+        this.hourlyWeather = hourly
       })
       httpGet(Domain.daylyWeatherURL + e.id).then((res) => {
         console.log(res)
-        this.dailyWeather = res.data.daily
+        let daily = res.data.daily
+        for (let i in daily) {
+          daily[i].date = daily[i].fxDate.substring(5)
+        }
+        this.dailyWeather = daily
+      })
+      httpGet(Domain.locationURL + e.id).then((res) => {
+        console.log(res)
+        this.cityName = res.data.location[0].name
       })
     }
   }
