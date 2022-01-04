@@ -21,6 +21,7 @@
         :realTimeWeather="realTimeWeather"
         :hourlyWeather="hourlyWeather"
         :dailyWeather="dailyWeather"
+        :realTimeAirQuality="realTimeAirQuality"
       ></InfoBody>
     </div>
   </div>
@@ -47,7 +48,8 @@ export default {
       realTimeWeather: '',
       hourlyWeather: [],
       dailyWeather: [],
-      cityName: ''
+      cityName: '',
+      realTimeAirQuality: ''
     }
   },
   methods: {
@@ -92,7 +94,7 @@ export default {
         }
         this.hourlyWeather = hourly
       })
-      httpGet(Domain.daylyWeatherURL + e.id).then((res) => {
+      httpGet(Domain.dailyWeatherURL + e.id).then((res) => {
         console.log(res)
         let daily = res.data.daily
         for (let i in daily) {
@@ -103,6 +105,10 @@ export default {
       httpGet(Domain.locationURL + e.id).then((res) => {
         console.log(res)
         this.cityName = res.data.location[0].name
+      })
+      httpGet(Domain.realTimeAir + e.id).then((res) => {
+        console.log(res)
+        this.realTimeAirQuality = res.data.now
       })
     }
   }
