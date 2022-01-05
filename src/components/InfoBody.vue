@@ -72,15 +72,25 @@
                 </template>
                 <div style="margin-top: 12px">
                   <span style="margin-right: 5px"
+                    ><template v-if="realTimeWeather.text === '晴'"
+                      ><img
+                        style="height: 18px; width: 18px; float: left"
+                        src="../assets/icon/sunny.svg"
+                        alt="" /></template
                     ><template v-if="realTimeWeather.text === '多云'"
                       ><img
                         style="height: 18px; width: 18px; float: left"
                         src="../assets/icon/cloudy.svg"
                         alt="" /></template
-                    ><template v-if="realTimeWeather.text === '晴'"
+                    ><template v-if="realTimeWeather.text === '阴'"
                       ><img
                         style="height: 18px; width: 18px; float: left"
-                        src="../assets/icon/sunny.svg"
+                        src="../assets/icon/overcast.svg"
+                        alt="" /></template
+                    ><template v-if="realTimeWeather.text === '阵雨'"
+                      ><img
+                        style="height: 18px; width: 18px; float: left"
+                        src="../assets/icon/shower.svg"
                         alt="" /></template
                     ><template v-if="realTimeWeather.text === '小雨'"
                       ><img
@@ -92,10 +102,40 @@
                         style="height: 18px; width: 18px; float: left"
                         src="../assets/icon/moderateRain.svg"
                         alt="" /></template
-                    ><template v-if="realTimeWeather.text === '阴'"
+                    ><template v-if="realTimeWeather.text === '大雨'"
                       ><img
                         style="height: 18px; width: 18px; float: left"
-                        src="../assets/icon/overcast.svg"
+                        src="../assets/icon/rainstorm.svg"
+                        alt="" /></template
+                    ><template v-if="realTimeWeather.text === '小雨'"
+                      ><img
+                        style="height: 18px; width: 18px; float: left"
+                        src="../assets/icon/lightrain.svg"
+                        alt="" /></template
+                    ><template v-if="realTimeWeather.text === '阵雪'"
+                      ><img
+                        style="height: 18px; width: 18px; float: left"
+                        src="../assets/icon/snowshower.svg"
+                        alt="" /></template
+                    ><template v-if="realTimeWeather.text === '小雪'"
+                      ><img
+                        style="height: 18px; width: 18px; float: left"
+                        src="../assets/icon/lightsnow.svg"
+                        alt="" /></template
+                    ><template v-if="realTimeWeather.text === '中雪'"
+                      ><img
+                        style="height: 18px; width: 18px; float: left"
+                        src="../assets/icon/moderateSnow.svg"
+                        alt="" /></template
+                    ><template v-if="realTimeWeather.text === '大雪'"
+                      ><img
+                        style="height: 18px; width: 18px; float: left"
+                        src="../assets/icon/snowstorm.svg"
+                        alt="" /></template
+                    ><template v-if="realTimeWeather.text === '雾'"
+                      ><img
+                        style="height: 18px; width: 18px; float: left"
+                        src="../assets/icon/foggy.svg"
                         alt="" /></template
                     ><template v-if="realTimeWeather.text === '雨夹雪'"
                       ><img
@@ -190,6 +230,11 @@
                       style="height: 18px; width: 18px; padding: 15px 0"
                       src="../assets/icon/snowstorm.svg"
                       alt="" /></template
+                  ><template v-if="item.text === '雨夹雪'">
+                    <img
+                      style="height: 18px; width: 18px; padding: 15px 0"
+                      src="../assets/icon/sleet.svg"
+                      alt="" /></template
                   ><template v-if="item.text === '雾'">
                     <img
                       style="height: 18px; width: 18px; padding: 15px 0"
@@ -265,6 +310,11 @@
                     ><img
                       style="height: 18px; width: 18px"
                       src="../assets/icon/snowstorm.svg"
+                      alt="" /></template
+                  ><template v-if="item.textDay === '雨夹雪'"
+                    ><img
+                      style="height: 18px; width: 18px"
+                      src="../assets/icon/sleet.svg"
                       alt="" /></template
                   ><template v-if="item.textDay === '雾'"
                     ><img
