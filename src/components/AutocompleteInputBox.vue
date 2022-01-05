@@ -4,6 +4,7 @@
       <el-row class="demo-autocomplete">
         <el-col>
           <el-autocomplete
+            style="margin-top: 100px"
             value-key="cities-province"
             class="inline-input"
             v-model="userInput"
@@ -53,14 +54,23 @@ export default {
     }
   },
   methods: {
+    // queryString是用户输入的值
     querySearch(queryString, cb) {
-      httpGet(Domain.locationURL + this.userInput).then((res) => {
+      httpGet(Domain.locationURL + queryString).then((res) => {
         console.log(res)
-        var cities = res.data.location
-        for (var i in cities) {
+        // 请求到一组地理位置数组
+        let cities = res.data.location
+        if (!cities) {
+          // 如果没有请求到数据,就显示暂无数据
+          let r = [{ 'cities-province': '暂无数据' }]
+          cb(r)
+        }
+        for (let i in cities) {
+          // 给每一项数组添加一组数据:'城市-省份'
           cities[i]['cities-province'] = cities[i].name + '-' + cities[i].adm1
         }
-        var results = queryString
+        // 拿用户输入的关键字，去筛请求到的输数组
+        let results = queryString
           ? cities.filter(this.createFilter(queryString))
           : cities
         cb(results)
