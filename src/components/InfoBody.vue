@@ -106,11 +106,6 @@
                       style="height: 18px; width: 18px; float: left"
                       src="../assets/icon/rainstorm.svg"
                       alt="" /></template
-                  ><template v-if="realTimeWeather.text === '小雨'"
-                    ><img
-                      style="height: 18px; width: 18px; float: left"
-                      src="../assets/icon/lightrain.svg"
-                      alt="" /></template
                   ><template v-if="realTimeWeather.text === '阵雪'"
                     ><img
                       style="height: 18px; width: 18px; float: left"
@@ -166,6 +161,7 @@
         </div>
         <div class="forecastBox">
           <div style="font-size: 18px" class="fontFamily">24小时预报</div>
+          <div style="width: 895px; height: 300px" id="hourly"></div>
           <div style="text-align: center">
             <span
               style="padding: 20px; display: inline-block"
@@ -247,6 +243,7 @@
         </div>
         <div class="forecastBox">
           <div style="font-size: 18px" class="fontFamily">10日天气预报</div>
+          <div style="width: 895px; height: 500px" id="daily"></div>
           <div style="text-align: center">
             <span
               style="padding: 60px 55px; display: inline-block"
@@ -333,18 +330,159 @@
 </template>
 
 <script>
+import * as echarts from 'echarts/core'
+import {
+  GridComponent,
+  TooltipComponent,
+  LegendComponent
+} from 'echarts/components'
+import { LineChart, BarChart } from 'echarts/charts'
+import { UniversalTransition } from 'echarts/features'
+import { CanvasRenderer } from 'echarts/renderers'
+import { Promise } from 'q'
+echarts.use([
+  GridComponent,
+  LineChart,
+  CanvasRenderer,
+  UniversalTransition,
+  TooltipComponent,
+  LegendComponent,
+  BarChart
+])
 export default {
+  // 在子组件(当前组件)自定义一个prop,将父组件的数据与该prop绑定,在子组件(当前组件),可以用this.prop拿到与该prop绑定的数据
   props: [
     'realTimeWeather',
     'hourlyWeather',
     'dailyWeather',
     'cityName',
-    'realTimeAirQuality'
+    'realTimeAirQuality',
+    'echartData',
+    'hourlyEchart'
   ],
   name: 'InfoBody',
   data() {
     return {
       show: true
+    }
+  },
+  methods: {
+    // dom没加载，echarts没有检测到dom，那么我就让dom加载后再去获取dom，这里就要用到es6语法中的Promise
+    getHourlyEchart() {
+      let newPromise = new Promise((resolve) => {
+        resolve()
+      })
+
+      newPromise.then(() => {
+        let hourlyEchart = this.hourlyEchart
+        var chartDom = document.getElementById('hourly')
+        var myChart = echarts.init(chartDom)
+        var option
+        option = {
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: { type: 'cross' }
+          },
+          legend: {},
+          xAxis: {
+            type: 'category',
+            axisTick: {
+              alignWithLabel: true
+            },
+            data: hourlyEchart.fxtime
+          },
+          yAxis: [
+            {
+              type: 'value',
+              name: '温度',
+              position: 'left',
+              axisLabel: {
+                formatter: '{value} °'
+              }
+            }
+            // {
+            //   type: 'value',
+            //   name: '湿度',
+            //   position: 'right',
+            //   axisLabel: {
+            //     formatter: '{value} %'
+            //   }
+            // }
+          ],
+
+          series: [
+            {
+              name: '温度',
+              data: hourlyEchart.temp,
+              type: 'line',
+              smooth: true,
+              color: 'orange',
+              yAxisIndex: 0 // yAxis数组中下标为x的数据
+            }
+            // {
+            //   name: '湿度',
+            //   data: hourlyEchart.humidity,
+            //   type: 'bar',
+            //   color: 'aqua',
+            //   yAxisIndex: 1
+            // }
+          ]
+        }
+        option && myChart.setOption(option)
+      })
+    },
+    echart() {
+      console.log('e1')
+      let newPromise = new Promise((resolve) => {
+        resolve()
+      })
+      newPromise.then(() => {
+        let echartData = this.echartData
+        console.log('e2', echartData)
+        var chartDom = document.getElementById('daily')
+        var myChart = echarts.init(chartDom)
+        var option
+        option = {
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: { type: 'cross' }
+          },
+          legend: {},
+          xAxis: {
+            type: 'category',
+            axisTick: {
+              alignWithLabel: true
+            },
+            data: echartData.date
+          },
+          yAxis: {
+            type: 'value',
+            name: '温度',
+            position: 'left',
+            axisLabel: {
+              formatter: '{value} °'
+            }
+          },
+
+          series: [
+            {
+              name: '最高温度',
+              data: echartData.tempMax,
+              type: 'line',
+              smooth: true,
+              color: 'orange'
+            },
+            {
+              name: '最低温度',
+              data: echartData.tempMin,
+              type: 'line',
+              smooth: true,
+              color: 'purple'
+            }
+          ]
+        }
+        option && myChart.setOption(option)
+      })
     }
   }
 }
