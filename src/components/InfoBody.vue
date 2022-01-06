@@ -159,7 +159,7 @@
             ><span>日落{{ dailyWeather[0].sunset }}</span>
           </div>
         </div>
-        <div class="forecastBox">
+        <div style="background: rgba(0, 0, 0, 0.15)" class="forecastBox">
           <div style="font-size: 18px" class="fontFamily">24小时预报</div>
           <div style="width: 895px; height: 300px" id="hourly"></div>
           <div style="text-align: center">
@@ -241,7 +241,7 @@
             >
           </div>
         </div>
-        <div class="forecastBox">
+        <div style="background: rgba(0, 0, 0, 0.15)" class="forecastBox">
           <div style="font-size: 18px" class="fontFamily">10日天气预报</div>
           <div style="width: 895px; height: 500px" id="daily"></div>
           <div style="text-align: center">
