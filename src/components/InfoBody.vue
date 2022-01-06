@@ -386,6 +386,7 @@ export default {
           legend: {},
           xAxis: {
             type: 'category',
+            name: '时',
             axisTick: {
               alignWithLabel: true
             },
@@ -432,13 +433,11 @@ export default {
       })
     },
     echart() {
-      console.log('e1')
       let newPromise = new Promise((resolve) => {
         resolve()
       })
       newPromise.then(() => {
         let echartData = this.echartData
-        console.log('e2', echartData)
         var chartDom = document.getElementById('daily')
         var myChart = echarts.init(chartDom)
         var option
@@ -450,6 +449,7 @@ export default {
           legend: {},
           xAxis: {
             type: 'category',
+            name: '日期',
             axisTick: {
               alignWithLabel: true
             },

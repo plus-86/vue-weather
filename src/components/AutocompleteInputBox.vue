@@ -155,7 +155,7 @@ export default {
           console.log(res)
           this.realTimeAirQuality = res.data.now
         })
-        setTimeout(resolve, 200) // Promise的起始函数是异步执行的,直接resolve()的话,会在数据以上数据处理完之前,跳到下面的then里面去执行里面的函数,从而导致无法正常显示echarts
+        setTimeout(resolve, 300) // Promise的起始函数是异步执行的,直接resolve()的话,会在数据以上数据处理完之前,跳到下面的then里面去执行里面的函数,从而导致无法正常显示echarts
       })
 
       newPromise.then(() => {
