@@ -65,7 +65,6 @@ export default {
     // queryString是用户输入的值
     querySearch(queryString, cb) {
       httpGet(Domain.locationURL + queryString).then((res) => {
-        console.log(res)
         // 请求到一组地理位置数组
         let cities = res.data.location
         if (!cities) {
@@ -93,10 +92,7 @@ export default {
     },
     handleSelect(e) {
       let newPromise = new Promise((resolve) => {
-        console.log(this, '看看this')
-
         httpGet(Domain.realTimeWeatherURL + e.id).then((res) => {
-          console.log(res)
           let now = res.data.now
           now.formatTime =
             now.obsTime.substring(0, 4) +
@@ -108,7 +104,6 @@ export default {
           this.realTimeWeather = now
         })
         httpGet(Domain.hourlyWeatherURL + e.id).then((res) => {
-          console.log(res)
           let hourly = res.data.hourly
           this.hourlyEchart = {
             fxTime: [],
@@ -128,7 +123,6 @@ export default {
           this.hourlyWeather = hourly
         })
         httpGet(Domain.dailyWeatherURL + e.id).then((res) => {
-          console.log(res)
           let daily = res.data.daily
           this.echartData = {
             date: [],
@@ -148,18 +142,16 @@ export default {
           this.dailyWeather = daily
         })
         httpGet(Domain.locationURL + e.id).then((res) => {
-          console.log(res)
           this.cityName = res.data.location[0].name
         })
         httpGet(Domain.realTimeAir + e.id).then((res) => {
-          console.log(res)
           this.realTimeAirQuality = res.data.now
         })
+
         setTimeout(resolve, 300) // Promise的起始函数是异步执行的,直接resolve()的话,会在数据以上数据处理完之前,跳到下面的then里面去执行里面的函数,从而导致无法正常显示echarts
       })
 
       newPromise.then(() => {
-        console.log('看echart', this)
         this.$refs.InfoBody.getHourlyEchart()
         this.$refs.InfoBody.echart() // 父组件调用子组件方法: 先import子组件,在子组件标签内写ref='自定义名称',然后this.$ref.自定义名称.方法名()
       })

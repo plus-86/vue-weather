@@ -246,7 +246,7 @@
           <div style="width: 895px; height: 500px" id="daily"></div>
           <div style="text-align: center">
             <span
-              style="padding: 60px 55px; display: inline-block"
+              style="padding: 60px 45px; display: inline-block"
               v-for="(item, index) in dailyWeather"
               :key="index"
               ><span style="display: inline-block">{{ item.date }}</span
@@ -320,6 +320,8 @@
               ><br />
               <span style="display: inline-block">
                 {{ item.tempMin }}°~{{ item.tempMax }}°</span
+              ><br /><span>{{ item.textDay }}</span> <br /><span
+                >{{ item.windDirDay }}{{ item.windScaleDay }}级</span
               ></span
             >
           </div>
