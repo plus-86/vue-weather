@@ -374,16 +374,21 @@ export default {
       let newPromise = new Promise((resolve) => {
         resolve()
       })
-
+      // tooltip.axisPointer.label 坐标轴指示器的文本标签 .color 文字颜色
+      // xAxis.axisLine.lineStyle.color 坐标轴线线的颜色
       newPromise.then(() => {
         let hourlyEchart = this.hourlyEchart
-        var chartDom = document.getElementById('hourly')
-        var myChart = echarts.init(chartDom)
-        var option
-        option = {
+        let chartDom = document.getElementById('hourly')
+        let myChart = echarts.init(chartDom)
+        let option = {
           tooltip: {
             trigger: 'axis',
-            axisPointer: { type: 'cross' }
+            axisPointer: {
+              type: 'cross',
+              label: {
+                color: '#000'
+              }
+            }
           },
           legend: {},
           xAxis: {
@@ -392,7 +397,13 @@ export default {
             axisTick: {
               alignWithLabel: true
             },
-            data: hourlyEchart.fxtime
+            data: hourlyEchart.fxtime,
+            axisLine: {
+              lineStyle: {
+                color: '#fff',
+                width: 2
+              }
+            }
           },
           yAxis: [
             {
@@ -401,6 +412,11 @@ export default {
               position: 'left',
               axisLabel: {
                 formatter: '{value} °'
+              },
+              axisLine: {
+                lineStyle: {
+                  color: '#fff'
+                }
               }
             }
             // {
@@ -440,13 +456,17 @@ export default {
       })
       newPromise.then(() => {
         let echartData = this.echartData
-        var chartDom = document.getElementById('daily')
-        var myChart = echarts.init(chartDom)
-        var option
-        option = {
+        let chartDom = document.getElementById('daily')
+        let myChart = echarts.init(chartDom)
+        let option = {
           tooltip: {
             trigger: 'axis',
-            axisPointer: { type: 'cross' }
+            axisPointer: {
+              type: 'cross',
+              label: {
+                color: '#000'
+              }
+            }
           },
           legend: {},
           xAxis: {
@@ -455,7 +475,13 @@ export default {
             axisTick: {
               alignWithLabel: true
             },
-            data: echartData.date
+            data: echartData.date,
+            axisLine: {
+              lineStyle: {
+                color: '#fff',
+                width: 2
+              }
+            }
           },
           yAxis: {
             type: 'value',
@@ -463,6 +489,11 @@ export default {
             position: 'left',
             axisLabel: {
               formatter: '{value} °'
+            },
+            axisLine: {
+              lineStyle: {
+                color: '#fff'
+              }
             }
           },
 

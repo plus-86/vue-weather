@@ -1,6 +1,10 @@
 <template>
   <div>
-    <img src="" alt="" />
+    <img
+      src="../../src/assets/backgroundImage/bg.jpg"
+      style="height: 100%; width: 100%; position: fixed; z-index: -99"
+      alt=""
+    />
     <div class="autocomplete">
       <el-row class="demo-autocomplete">
         <el-col>
