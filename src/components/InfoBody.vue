@@ -241,7 +241,10 @@
             >
           </div>
         </div>
-        <div style="background: rgba(0, 0, 0, 0.15)" class="forecastBox">
+        <div
+          style="margin: 20px auto; background: rgba(0, 0, 0, 0.15)"
+          class="forecastBox"
+        >
           <div style="font-size: 18px" class="fontFamily">10日天气预报</div>
           <div style="width: 895px; height: 500px" id="daily"></div>
           <div style="text-align: center">
