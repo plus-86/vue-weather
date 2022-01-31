@@ -5,6 +5,24 @@
       style="height: 100%; width: 100%; position: fixed; z-index: -99"
       alt=""
     />
+    <img
+      v-if="realTimeWeather.text === '晴'"
+      src="../../src/assets/backgroundImage/bgSunny.jpg"
+      style="height: 100%; width: 100%; position: fixed; z-index: -99"
+      alt=""
+    />
+    <img
+      v-if="realTimeWeather.text === '阴'"
+      src="../../src/assets/backgroundImage/bgOvercast.jpg"
+      style="height: 100%; width: 100%; position: fixed; z-index: -99"
+      alt=""
+    />
+    <img
+      v-if="realTimeWeather.text === '多云'"
+      src="../../src/assets/backgroundImage/bgCloudy.jpg"
+      style="height: 100%; width: 100%; position: fixed; z-index: -99"
+      alt=""
+    />
     <div class="autocomplete">
       <el-row class="demo-autocomplete">
         <el-col>
