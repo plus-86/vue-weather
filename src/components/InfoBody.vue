@@ -434,7 +434,6 @@ export default {
 
           series: [
             {
-              name: '温度',
               data: hourlyEchart.temp,
               type: 'line',
               smooth: true,
@@ -502,14 +501,12 @@ export default {
 
           series: [
             {
-              name: '最高温度',
               data: echartData.tempMax,
               type: 'line',
               smooth: true,
               color: 'orange'
             },
             {
-              name: '最低温度',
               data: echartData.tempMin,
               type: 'line',
               smooth: true,

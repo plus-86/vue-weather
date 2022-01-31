@@ -1,7 +1,7 @@
 <template>
   <div>
     <img
-      src="../../src/assets/backgroundImage/bg.jpg"
+      src="../../src/assets/backgroundImage/bgCloudy.jpg"
       style="height: 100%; width: 100%; position: fixed; z-index: -99"
       alt=""
     />
